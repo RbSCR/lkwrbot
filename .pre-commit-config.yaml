@@ -35,7 +35,7 @@ repos:
 
 # Package XML
 - repo: https://github.com/Joschi3/package_xml_validation.git
-  rev: v1.4.2
+  rev: v1.6.0
   hooks:
     - id: format-package-xml
       name: Validate and Format package.xml
