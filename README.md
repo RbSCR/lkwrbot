@@ -10,5 +10,3 @@
 Omnidirectional mobile robot platform, based upon the LeKiwi 3 wheel omnidirectional mobile robot base.
 
 ## ✨ Features
-
-  TODO - describe features

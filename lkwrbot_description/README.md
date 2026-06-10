@@ -6,8 +6,3 @@
 ![License](https://img.shields.io/github/license/adityakamath/sts_hardware_interface?label=License)
 
 Description package for LKWrbot
-
-
-TODO - add package & CMakeLists files
-
-TODO - create urdf
