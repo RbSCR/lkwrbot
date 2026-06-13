@@ -1,0 +1,58 @@
+[0.020s] Invoking command in '/home/sam/lkwrbot/ros2_ws/build/lkwrbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sam/lkwrbot/ros2_ws/src/lkwrbot_description -DCMAKE_INSTALL_PREFIX=/home/sam/lkwrbot/ros2_ws/install/lkwrbot_description
+[0.294s] -- The C compiler identification is GNU 13.3.0
+[0.501s] -- The CXX compiler identification is GNU 13.3.0
+[0.544s] -- Detecting C compiler ABI info
+[0.725s] -- Detecting C compiler ABI info - done
+[0.743s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.744s] -- Detecting C compile features
+[0.744s] -- Detecting C compile features - done
+[0.764s] -- Detecting CXX compiler ABI info
+[0.936s] -- Detecting CXX compiler ABI info - done
+[0.954s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.954s] -- Detecting CXX compile features
+[0.955s] -- Detecting CXX compile features - done
+[0.976s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.227s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.458s] -- Found urdf: 2.10.0 (/opt/ros/jazzy/share/urdf/cmake)
+[1.559s] -- Found TinyXML2 via Config file: /usr/lib/x86_64-linux-gnu/cmake/tinyxml2
+[1.587s] -- Found xacro: 2.1.1 (/opt/ros/jazzy/share/xacro/cmake)
+[1.594s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[1.786s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.786s] -- Configured 'flake8' exclude dirs and/or files: 
+[1.788s] -- Added test 'lint_cmake' to check CMake code style
+[1.789s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.791s] -- Added test 'xmllint' to check XML markup files
+[1.794s] -- Configuring done (1.7s)
+[1.800s] -- Generating done (0.0s)
+[1.804s] -- Build files have been written to: /home/sam/lkwrbot/ros2_ws/build/lkwrbot_description
+[1.816s] Invoked command in '/home/sam/lkwrbot/ros2_ws/build/lkwrbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sam/lkwrbot/ros2_ws/src/lkwrbot_description -DCMAKE_INSTALL_PREFIX=/home/sam/lkwrbot/ros2_ws/install/lkwrbot_description
+[1.819s] Invoking command in '/home/sam/lkwrbot/ros2_ws/build/lkwrbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/sam/lkwrbot/ros2_ws/build/lkwrbot_description -- -j14 -l14
+[1.886s] Invoked command in '/home/sam/lkwrbot/ros2_ws/build/lkwrbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/sam/lkwrbot/ros2_ws/build/lkwrbot_description -- -j14 -l14
+[1.901s] Invoking command in '/home/sam/lkwrbot/ros2_ws/build/lkwrbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/sam/lkwrbot/ros2_ws/build/lkwrbot_description
+[1.919s] -- Install configuration: ""
+[1.919s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/urdf
+[1.919s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/urdf/lkwrbot.urdf
+[1.919s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/urdf/gazebo.xacro
+[1.920s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/urdf/ros2_control.xacro
+[1.920s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/urdf/lkwrbot.xacro
+[1.920s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/urdf/materials.xacro
+[1.920s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/rviz
+[1.920s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/rviz/lkwrbot.rviz
+[1.920s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/launch
+[1.921s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/launch/display.launch.py
+[1.921s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/ament_index/resource_index/package_run_dependencies/lkwrbot_description
+[1.921s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/ament_index/resource_index/parent_prefix_path/lkwrbot_description
+[1.921s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/environment/ament_prefix_path.sh
+[1.921s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/environment/ament_prefix_path.dsv
+[1.922s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/environment/path.sh
+[1.922s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/environment/path.dsv
+[1.922s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/local_setup.bash
+[1.922s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/local_setup.sh
+[1.922s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/local_setup.zsh
+[1.922s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/local_setup.dsv
+[1.923s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/package.dsv
+[1.923s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/ament_index/resource_index/packages/lkwrbot_description
+[1.923s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/cmake/lkwrbot_descriptionConfig.cmake
+[1.923s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/cmake/lkwrbot_descriptionConfig-version.cmake
+[1.923s] -- Installing: /home/sam/lkwrbot/ros2_ws/install/lkwrbot_description/share/lkwrbot_description/package.xml
+[1.926s] Invoked command in '/home/sam/lkwrbot/ros2_ws/build/lkwrbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/sam/lkwrbot/ros2_ws/build/lkwrbot_description
