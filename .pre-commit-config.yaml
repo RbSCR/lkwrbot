@@ -18,10 +18,17 @@ repos:
   hooks:
     - id: check-added-large-files
     - id: trailing-whitespace
-      exclude_types: [rst]
+      exclude_types: [rst, markdown]
+      exclude: ^third_party/
     - id: end-of-file-fixer
+      exclude: ^third_party/
     - id: check-yaml
+      args: ["--allow-multiple-documents"]
+    - id: check-xml
+      exclude: ^third_party/
     - id: mixed-line-ending
+      exclude: ^third_party/
+    - id: check-symlinks
 
 # Cmake hooks
 - repo: local
