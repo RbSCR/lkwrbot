@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find lkwrbot_description)/urdf/inertia_tensors.urdf.xacro"/>
+  <xacro:include filename="$(find lkwrbot_description)/urdf/base.common.xacro"/>
+
+  <xacro:macro name="lkwrbot_base_module" params="parent *origin">
+
+    <!-- Material definitions -->
+    <material name="base_material">
+      <color rgba="${white_smoke_rgba}"/>
+    </material>
+
+    <material name="omniwheel_material">
+      <color rgba="${dim_grey_rgba}"/>
+    </material>
+
+    <!-- Mount base_link to parent platform at specified origin -->
+    <joint name="lkwrbot_mount_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="bottom_base_plate_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <!-- Bottom base plate -->
+    <link name="bottom_base_plate_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 -${pi/2}"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/base_plate_layer1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <cylinder length="${base_plate_height}" radius="${base_plate_diameter/2}"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_cylinder mass="${bottom_base_plate_mass}" radius="${base_plate_diameter/2}" length="${base_plate_height}"/>
+    </link>
+
+    <!-- Top base plate -->
+    <link name="top_base_plate_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 -${pi/2}" />
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/base_plate_layer2.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <cylinder length="${base_plate_height}" radius="${base_plate_diameter/2}"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_cylinder mass="${top_base_plate_mass}" radius="${base_plate_diameter/2}" length="${base_plate_height}"/>
+    </link>
+
+
+    <!-- TODO add servo's -->
+
+    <!-- Left motor mount -->
+    <link name="left_motormount_link">
+      <visual>
+        <origin xyz="-${motormount_depth/2} ${motormount_width/2} 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/motormount.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <!-- No collision element: inside robot -->
+      <xacro:default_inertial mass="${motormount_mass}"/>
+    </link>
+
+    <!-- Backmotor mount -->
+    <link name="back_motormount_link">
+      <visual>
+        <origin xyz="-${motormount_depth/2} ${motormount_width/2} 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/motormount.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <!-- No collision element: inside robot -->
+      <xacro:default_inertial mass="${motormount_mass}"/>
+    </link>
+
+    <!-- Right motor mount -->
+    <link name="right_motormount_link">
+      <visual>
+        <origin xyz="-${motormount_depth/2} ${motormount_width/2} 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/motormount.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <!-- No collision element: inside robot -->
+      <xacro:default_inertial mass="${motormount_mass}"/>
+    </link>
+
+    <!-- Left wheel -->
+    <link name="left_wheel_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/omnidirectional_wheel.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="omniwheel_material"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="${omniwheel_width}" radius="${omniwheel_radius}"/>
+        </geometry>
+      </collision>
+      <!-- Assuming inertia is comparable to a cylinder -->
+      <xacro:inertial_cylinder mass="${omniwheel_mass}" radius="${omniwheel_radius}" length="${omniwheel_width}"/>
+    </link>
+
+    <!-- Back wheel -->
+    <link name="back_wheel_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/omnidirectional_wheel.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="omniwheel_material"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="${omniwheel_width}" radius="${omniwheel_radius}"/>
+        </geometry>
+      </collision>
+      <!-- Assuming inertia is comparable to a cylinder -->
+      <xacro:inertial_cylinder mass="${omniwheel_mass}" radius="${omniwheel_radius}" length="${omniwheel_width}"/>
+    </link>
+
+    <!-- Right wheel -->
+    <link name="right_wheel_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/omnidirectional_wheel.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="omniwheel_material"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="${omniwheel_width}" radius="${omniwheel_radius}"/>
+        </geometry>
+      </collision>
+      <!-- Assuming inertia is comparable to a cylinder -->
+      <xacro:inertial_cylinder mass="${omniwheel_mass}" radius="${omniwheel_radius}" length="${omniwheel_width}"/>
+    </link>
+
+    <!-- JOINTS -->
+
+    <joint name="top_plate_joint" type="fixed">
+      <parent link="bottom_base_plate_link"/>
+      <child link="top_base_plate_link"/>
+      <origin xyz="0 0 0.052" rpy="0 0 0"/>
+    </joint>
+
+    <!-- left motormount joint: 60 degrees anti-clockwise from +X at radius wheel_base_radius -->
+    <joint name="left_motormount_joint" type="fixed">
+      <parent link="bottom_base_plate_link"/>
+      <child link="left_motormount_link"/>
+      <origin xyz="${motormount_base_radius * cos(wheel_radial_offset)} ${motormount_base_radius * sin(wheel_radial_offset)} 0" rpy="0 0 ${wheel_radial_offset}"/>
+    </joint>
+
+    <!-- back motormount joint: 180 degrees anti-clockwise from +X at radius base_radius -->
+    <joint name="back_motormount_joint" type="fixed">
+      <parent link="bottom_base_plate_link"/>
+      <child link="back_motormount_link"/>
+      <origin xyz="${motormount_base_radius * cos(wheel_radial_offset + wheel_radial_theta)} ${motormount_base_radius * sin(wheel_radial_offset + wheel_radial_theta)} 0" rpy="0 0 ${wheel_radial_offset + wheel_radial_theta}"/>
+    </joint>
+
+    <!-- right motormount joint: 300 degrees (or -60 degrees) anti-clockwise from +X at radius base_radius -->
+    <joint name="right_motormount_joint" type="fixed">
+      <parent link="bottom_base_plate_link"/>
+      <child link="right_motormount_link"/>
+      <origin xyz="${motormount_base_radius * cos(wheel_radial_offset - wheel_radial_theta)} ${motormount_base_radius * sin(wheel_radial_offset - wheel_radial_theta)} 0" rpy="0 0 ${wheel_radial_offset - wheel_radial_theta}"/>
+    </joint>
+
+
+    <!-- left wheel joint: 60 degrees anti-clockwise from +X at radius wheel_base_radius -->
+    <joint name="left_wheel_joint" type="continuous">
+      <parent link="bottom_base_plate_link"/>
+      <child link="left_wheel_link"/>
+      <origin xyz="${wheel_base_radius * cos(wheel_radial_offset)} ${wheel_base_radius * sin(wheel_radial_offset)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${wheel_radial_offset}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
+
+    </joint>
+
+    <!-- back wheel joint: 180 degrees anti-clockwise from +X at radius base_radius -->
+    <joint name="back_wheel_joint" type="continuous">
+      <parent link="bottom_base_plate_link"/>
+      <child link="back_wheel_link"/>
+      <origin xyz="${wheel_base_radius * cos(wheel_radial_offset + wheel_radial_theta)} ${wheel_base_radius * sin(wheel_radial_offset + wheel_radial_theta)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${wheel_radial_offset + wheel_radial_theta}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}" />
+    </joint>
+
+    <!-- right wheel joint: 300 degrees (or -60 degrees) anti-clockwise from +X at radius base_radius -->
+    <joint name="right_wheel_joint" type="continuous">
+      <parent link="bottom_base_plate_link"/>
+      <child link="right_wheel_link"/>
+      <origin xyz="${wheel_base_radius * cos(wheel_radial_offset - wheel_radial_theta)} ${wheel_base_radius * sin(wheel_radial_offset - wheel_radial_theta)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${wheel_radial_offset - wheel_radial_theta}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}" />
+    </joint>
+
+  </xacro:macro>
+
+</robot>

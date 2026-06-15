@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Colors (RGBA) -->
+  <xacro:property name="white_smoke_rgba" value="0.961 0.961 0.961 1.0"/>
+  <xacro:property name="dim_grey_rgba" value="0.412 0.412 0.412 1.0"/>
+
+  <!-- Base mesh rotation about Z (rad) -->
+  <xacro:property name="base_offset_rz" value="${3*pi/2}"/> <!-- TODO check still used -->
+
+  <!-- Wheel mount offsets -->
+  <xacro:property name="wheel_base_radius" value="0.132239"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="wheel_base_offset_z" value="0.01036"/> <!--TODO determine/measure correct value -->
+
+  <!-- 60° offset from X-axis -->
+  <xacro:property name="wheel_radial_offset" value="${pi/3}"/>
+  <!-- 120° between wheels -->
+  <xacro:property name="wheel_radial_theta" value="${2*pi/3}"/>
+
+
+  <!-- Plate dimensions-->
+  <xacro:property name="base_plate_diameter" value="0.215"/>
+  <xacro:property name="base_plate_height" value="0.007"/>
+
+  <xacro:property name="bottom_base_plate_mass" value="0.116"/>
+  <xacro:property name="top_base_plate_mass" value="0.111"/>
+
+
+  <!-- Motormount dimensions-->
+  <xacro:property name="motormount_depth" value="0.035"/>
+  <xacro:property name="motormount_width" value="0.046"/>
+  <xacro:property name="motormount_height" value="0.045"/>
+
+  <xacro:property name="motormount_mass" value="0.010"/>
+
+  <xacro:property name="motormount_base_radius" value="${0.103 - motormount_depth/2}"/>
+
+
+  <!-- Omniwheel dimensions-->
+  <!-- taken from datasheet/brochure -->
+  <xacro:property name="omniwheel_diameter" value="0.100"/>
+  <xacro:property name="omniwheel_width" value="0.030"/>
+  <xacro:property name="omniwheel_mass" value="0.290"/>
+
+  <xacro:property name="omniwheel_radius" value="${omniwheel_diameter/2}"/>
+
+
+  <!-- Control related -->
+  <!-- TODO Determine if these should be spcified here or in a separate .urdf.xacro file -->
+  <xacro:property name="max_velocity_rads" value="${max_velocity_steps*2*pi/4096}"/> <!-- rad/s -->
+  <xacro:property name="max_torque_nm" value="2.942"/> <!-- N⋅m (30 kgf⋅cm for STS3215) -->
+
+</robot>

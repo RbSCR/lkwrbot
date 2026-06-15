@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lkwrbot">
+
+  <xacro:include filename="$(find lkwrbot_description)/urdf/base.common.xacro"/>
+  <xacro:include filename="$(find lkwrbot_description)/urdf/base.module.xacro"/>
+  <!-- xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro" -->
+
+
+  <!-- Standalone lkwrbot base -->
+  <link name="base_footprint"/>
+  <xacro:lkwrbot_base_module parent="base_footprint">
+    <origin xyz="0 0 ${wheel_base_radius - wheel_base_offset_z}" rpy="0 0 0"/>
+  </xacro:lkwrbot_base_module>
+
+</robot>

@@ -17,6 +17,7 @@ repos:
   rev: v6.0.0
   hooks:
     - id: check-added-large-files
+      args: ['--maxkb=16000']  # Sets the limit to 16,000 KB (16 MB) needed for omniwheel.stl
     - id: trailing-whitespace
       exclude_types: [rst]
     - id: end-of-file-fixer
