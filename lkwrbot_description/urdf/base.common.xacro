@@ -10,7 +10,7 @@
 
   <!-- Wheel mount offsets -->
   <xacro:property name="wheel_base_radius" value="0.132239"/> <!--TODO determine/measure correct value -->
-  <xacro:property name="wheel_base_offset_z" value="0.01036"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="wheel_base_offset_z" value="0.010"/>
 
   <!-- 60° offset from X-axis -->
   <xacro:property name="wheel_radial_offset" value="${pi/3}"/>
@@ -33,14 +33,13 @@
 
   <xacro:property name="motormount_mass" value="0.010"/>
 
-  <xacro:property name="motormount_base_radius" value="${0.103 - motormount_depth/2}"/>
+  <xacro:property name="motormount_base_radius" value="${0.100 - motormount_depth/2}"/>
 
 
   <!-- Omniwheel dimensions-->
-  <!-- taken from datasheet/brochure -->
-  <xacro:property name="omniwheel_diameter" value="0.100"/>
-  <xacro:property name="omniwheel_width" value="0.030"/>
-  <xacro:property name="omniwheel_mass" value="0.290"/>
+  <xacro:property name="omniwheel_diameter" value="0.102"/>
+  <xacro:property name="omniwheel_width" value="0.031"/>
+  <xacro:property name="omniwheel_mass" value="0.292"/>  <!--incl. hub & bolts nuts -->
 
   <xacro:property name="omniwheel_radius" value="${omniwheel_diameter/2}"/>
 
@@ -55,6 +54,8 @@
 
   <!-- Maximum allowable speed/acceleration/torque for each motor -->
   <xacro:property name="max_velocity_steps" value="${int(sts_max_velocity_steps * 0.85)}"/> <!-- steps/second (85% of hardware max, 15% safety margin) -->
+  <!-- VScode extension "Robot Developer Extensions for URDF" command 'URDF preview' can't handle int(...)-->
+  <!-- XXX xacro:property name="max_velocity_steps" value="$2890" --> <!-- steps/second (85% of hardware max, 15% safety margin) -->
   <xacro:property name="max_velocity_rads" value="${max_velocity_steps*2*pi/4096}"/> <!-- rad/s -->
   <xacro:property name="max_torque_nm" value="2.942"/> <!-- N⋅m (30 kgf⋅cm for STS3215) -->
 
