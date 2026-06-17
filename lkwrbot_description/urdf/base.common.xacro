@@ -4,6 +4,7 @@
   <!-- Colors (RGBA) -->
   <xacro:property name="white_smoke_rgba" value="0.961 0.961 0.961 1.0"/>
   <xacro:property name="dim_grey_rgba" value="0.412 0.412 0.412 1.0"/>
+  <xacro:property name="greyish_black_rgba" value="0.314 0.314 0.314 1.0"/>
 
   <!-- Base mesh rotation about Z (rad) -->
   <xacro:property name="base_offset_rz" value="${3*pi/2}"/> <!-- TODO check still used -->
@@ -13,9 +14,9 @@
   <xacro:property name="wheel_base_offset_z" value="0.010"/>
 
   <!-- 60° offset from X-axis -->
-  <xacro:property name="wheel_radial_offset" value="${pi/3}"/>
+  <xacro:property name="radial_offset" value="${pi/3}"/>
   <!-- 120° between wheels -->
-  <xacro:property name="wheel_radial_theta" value="${2*pi/3}"/>
+  <xacro:property name="radial_theta" value="${2*pi/3}"/>
 
 
   <!-- Plate dimensions-->
@@ -33,7 +34,17 @@
 
   <xacro:property name="motormount_mass" value="0.010"/>
 
-  <xacro:property name="motormount_base_radius" value="${0.100 - motormount_depth/2}"/>
+  <xacro:property name="motormount_base_radius" value="${0.100 - motormount_depth/2}"/> <!--TODO determine/measure correct value -->
+
+
+  <!-- Servo dimensions-->
+  <xacro:property name="servo_depth" value="0.035"/>
+  <xacro:property name="servo_width" value="0.025"/>
+  <xacro:property name="servo_height" value="0.045"/>
+
+  <xacro:property name="servo_mass" value="0.054"/>
+
+   <xacro:property name="servo_base_radius" value="${0.100 - motormount_depth/2 - servo_depth/2 + 0.004}"/> <!--TODO determine/measure correct value -->
 
 
   <!-- Omniwheel dimensions-->
