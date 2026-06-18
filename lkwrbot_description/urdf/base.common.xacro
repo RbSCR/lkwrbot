@@ -44,7 +44,7 @@
 
   <xacro:property name="servo_mass" value="0.054"/>
 
-   <xacro:property name="servo_base_radius" value="${0.100 - motormount_depth/2 - servo_depth/2 + 0.004}"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="servo_base_radius" value="${0.100 - motormount_depth/2 - servo_depth/2 + 0.004}"/> <!--TODO determine/measure correct value -->
 
 
   <!-- Omniwheel dimensions-->

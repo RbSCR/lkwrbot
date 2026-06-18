@@ -3,6 +3,7 @@
 
   <xacro:include filename="$(find lkwrbot_description)/urdf/inertia_tensors.urdf.xacro"/>
   <xacro:include filename="$(find lkwrbot_description)/urdf/base.common.xacro"/>
+  <xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro"/>
 
   <xacro:macro name="lkwrbot_base_module" params="parent *origin">
 
