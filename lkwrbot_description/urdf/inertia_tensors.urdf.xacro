@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- Copied from 'hector_xacro_tools' license: BSD-->
+<!-- url: https://github.com/tu-darmstadt-ros-pkg/hector_xacro_tools/tree/jazzy -->
+
+<!-- added: inertial_hollow_sphere, inertial_hollow_sphere_with_pose, -->
+<!--        inertial_thick_walled_cylinder, inertial_thick_walled_cylinder_with_pose -->
+<!--        default_inertial-->
+
+  <xacro:macro name="inertial_cuboid" params="mass x_length y_length z_length">
+    <inertial>
+      <!-- Cuboid -->
+      <mass value="${mass}" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="${(1/12) * mass * (y_length*y_length + z_length*z_length)}" ixy="0.0" ixz="0.0"
+               iyy="${(1/12) * mass * (x_length*x_length + z_length*z_length)}" iyz="0.0"
+               izz="${(1/12) * mass * (x_length*x_length + y_length*y_length)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_cuboid_with_pose" params="mass x_length y_length z_length *origin">
+    <inertial>
+      <!-- Cuboid with pose -->
+      <xacro:insert_block name="origin"/>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12) * mass * (y_length*y_length + z_length*z_length)}" ixy="0.0" ixz="0.0"
+               iyy="${(1/12) * mass * (x_length*x_length + z_length*z_length)}" iyz="0.0"
+               izz="${(1/12) * mass * (x_length*x_length + y_length*y_length)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_sphere" params="mass diameter">
+    <inertial>
+      <!-- Sphere -->
+      <mass value="${mass}" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="${(2/5) * mass * ( (diameter*0.5) * (diameter*0.5) )}" ixy="0.0" ixz="0.0"
+               iyy="${(2/5) * mass * ( (diameter*0.5) * (diameter*0.5) )}" iyz="0.0"
+               izz="${(2/5) * mass * ( (diameter*0.5) * (diameter*0.5) )}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_sphere_with_pose" params="mass diameter *origin">
+    <inertial>
+      <!-- Sphere with pose -->
+      <xacro:insert_block name="origin"/>
+      <mass value="${mass}" />
+      <inertia ixx="${(2/5) * mass * ( (diameter*0.5) * (diameter*0.5) )}" ixy="0.0" ixz="0.0"
+               iyy="${(2/5) * mass * ( (diameter*0.5) * (diameter*0.5) )}" iyz="0.0"
+               izz="${(2/5) * mass * ( (diameter*0.5) * (diameter*0.5) )}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_hollow_sphere" params="mass diameter">
+    <inertial>
+      <!-- Hollow sphere -->
+      <mass value="${mass}" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="${(2/3) * mass * ( (diameter*0.5) * (diameter*0.5) )}" ixy="0.0" ixz="0.0"
+               iyy="${(2/3) * mass * ( (diameter*0.5) * (diameter*0.5) )}" iyz="0.0"
+               izz="${(2/3) * mass * ( (diameter*0.5) * (diameter*0.5) )}" />
+    </inertial>
+  </xacro:macro>
+
+    <xacro:macro name="inertial_hollow_sphere_with_pose" params="mass diameter *origin">
+    <inertial>
+      <!-- Hollow sphere with pose-->
+      <xacro:insert_block name="origin"/>
+      <mass value="${mass}" />
+      <inertia ixx="${(2/3) * mass * ( (diameter*0.5) * (diameter*0.5) )}" ixy="0.0" ixz="0.0"
+               iyy="${(2/3) * mass * ( (diameter*0.5) * (diameter*0.5) )}" iyz="0.0"
+               izz="${(2/3) * mass * ( (diameter*0.5) * (diameter*0.5) )}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_cylinder" params="mass radius length">
+    <inertial>
+      <!-- Cylinder -->
+      <mass value="${mass}" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="${(1/12) * mass * (3*radius*radius + length*length)}" ixy="0.0" ixz="0.0"
+               iyy="${(1/12) * mass * (3*radius*radius + length*length)}" iyz="0.0"
+               izz="${(1/2)  * mass * (radius*radius)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_cylinder_with_pose" params="mass radius length *origin">
+    <inertial>
+      <!-- Cylinder with pose -->
+      <xacro:insert_block name="origin"/>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12) * mass * (3*radius*radius + length*length)}" ixy="0.0" ixz="0.0"
+               iyy="${(1/12) * mass * (3*radius*radius + length*length)}" iyz="0.0"
+               izz="${(1/2)  * mass * (radius*radius)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_thick_walled_cylinder" params="mass outer_radius inner_radius length">
+    <inertial>
+      <!-- Thick walled cylinder -->
+      <mass value="${mass}" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="${(1/12) * mass * (3*(outer_radius*outer_radius + inner_radius*inner_radius) + length*length)}" ixy="0.0" ixz="0.0"
+               iyy="${(1/12) * mass * (3*(outer_radius*outer_radius + inner_radius*inner_radius) + length*length)}" iyz="0.0"
+               izz="${(1/2)  * mass * (outer_radius*outer_radius + inner_radius*inner_radius)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_thick_walled_cylinder_with_pose" params="mass outer_radius inner_radius length *origin">
+    <inertial>
+      <!-- Thick walled cylinder with pose -->
+      <xacro:insert_block name="origin"/>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12) * mass * (3*(outer_radius*outer_radius + inner_radius*inner_radius) + length*length)}" ixy="0.0" ixz="0.0"
+               iyy="${(1/12) * mass * (3*(outer_radius*outer_radius + inner_radius*inner_radius) + length*length)}" iyz="0.0"
+               izz="${(1/2)  * mass * (outer_radius*outer_radius + inner_radius*inner_radius)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <!-- Default inertial -->
+      <mass value="${mass}" />
+      <inertia ixx="1e-3" ixy="0.0"   ixz="0.0"
+                          iyy="1e-3"  iyz="0.0"
+                                      izz="1e-3" />
+    </inertial>
+</xacro:macro>
+
+</robot>
