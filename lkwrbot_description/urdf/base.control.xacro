@@ -1,4 +1,101 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+<!-- Arguments (externally settable via command line or parent xacro) -->
+  <xacro:arg name="serial_port" default="/dev/ttySERVO"/>
+  <xacro:arg name="baud_rate" default="1000000"/>
+  <xacro:arg name="use_mock" default="false"/>
+  <xacro:arg name="use_sync_write" default="true"/>
+  <xacro:arg name="left_motor_id" default="7"/>
+  <xacro:arg name="back_motor_id" default="8"/>
+  <xacro:arg name="right_motor_id" default="9"/>
+
+
+  <!-- Configurable hardware parameters (STS3215 defaults) -->
+  <xacro:arg name="sts_max_velocity_steps" default="3400"/>  <!-- STS3215=3400, STS3032=2900, STS3235=3400 -->
+  <xacro:arg name="proportional_acc_max"   default="25"/>    <!-- [0-254]; 0 = disable proportional ACC -->
+
+  <!-- Base operating mode -->
+  <xacro:property name="base_operating_mode" value="1"/>  <!-- Velocity mode -->
+
+  <!-- Motor-specific parameter — sourced from arg, STS3215 default -->
+  <xacro:property name="sts_max_velocity_steps" value="$(arg sts_max_velocity_steps)"/>  <!-- Max hardware velocity in steps/s -->
+
+  <!-- Proportional ACC parameters (SyncWriteSpe velocity path only) -->
+  <!-- ACC given to the wheel with the largest |target - current| velocity delta. -->
+  <!-- All others scaled proportionally so every wheel finishes ramping in equal time. -->
+  <!-- Set proportional_acc_max to 0 to disable (ACC=0 for all wheels). -->
+  <xacro:property name="proportional_acc_max" value="$(arg proportional_acc_max)"/>        <!-- [0-254] -->
+
+
+  <!-- Maximum allowable speed/acceleration/torque for each motor -->
+  <!-- Note: max_velocity_rads and max_torque_nm are used in <limit> in the base.module.xacro -->
+  <xacro:property name="max_velocity_steps" value="${int(sts_max_velocity_steps * 0.85)}"/> <!-- steps/second (85% of hardware max, 15% safety margin) -->
+  <xacro:property name="max_velocity_rads" value="${max_velocity_steps*2*pi/4096}"/> <!-- rad/s -->
+  <xacro:property name="max_torque_nm" value="2.942"/> <!-- N⋅m (30 kgf⋅cm for STS3215) -->
+
+  <!-- Omnidirectional Kinematics Calculations -->
+  <!-- For 3-wheel omni drive: ω_i = (-sin(θ_i)·v_x + cos(θ_i)·v_y + R·ω_z) / r -->
+
+  <!-- Maximum allowable linear velocity per axis -->
+  <xacro:property name="max_linear_velocity_x"  value="${omniwheel_radius * max_velocity_rads / (sqrt(3)/2)}"/>
+  <xacro:property name="max_linear_velocity_y"  value="${omniwheel_radius * max_velocity_rads / 1.0}"/>
+  <xacro:property name="max_angular_velocity_z" value="${omniwheel_radius * max_velocity_rads / wheel_base_radius}"/>
+
+  <!-- ROS 2 CONTROL -->
+  <!-- System interface -->
+  <ros2_control name="lkwrbot_base" type="system">
+    <hardware>
+      <plugin>sts_hardware_interface/STSHardwareInterface</plugin>
+      <!-- Serial communication parameters -->
+      <param name="serial_port">$(arg serial_port)</param>
+      <param name="baud_rate">$(arg baud_rate)</param>
+      <param name="use_sync_write">$(arg use_sync_write)</param>
+      <param name="enable_mock_mode">$(arg use_mock)</param>
+      <!-- Motor-specific parameter (adjust for different STS motor models) -->
+      <param name="max_velocity_steps">${sts_max_velocity_steps}</param>
+      <!-- Proportional ACC: scale per-wheel acceleration so all wheels finish ramping in equal time -->
+      <param name="proportional_acc_max">${proportional_acc_max}</param>
+    </hardware>
+    <!-- Left wheel joint (Motor ID 7) -->
+    <joint name="left_wheel_joint">
+      <param name="motor_id">$(arg left_motor_id)</param>
+      <param name="operating_mode">${base_operating_mode}</param>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+      <state_interface name="voltage"/>
+      <state_interface name="temperature"/>
+      <state_interface name="current"/>
+      <state_interface name="is_moving"/>
+    </joint>
+    <!-- Back wheel joint (Motor ID 8) -->
+    <joint name="back_wheel_joint">
+      <param name="motor_id">$(arg back_motor_id)</param>
+      <param name="operating_mode">${base_operating_mode}</param>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+      <state_interface name="voltage"/>
+      <state_interface name="temperature"/>
+      <state_interface name="current"/>
+      <state_interface name="is_moving"/>
+    </joint>
+    <!-- Right wheel joint (Motor ID 9) -->
+    <joint name="right_wheel_joint">
+      <param name="motor_id">$(arg right_motor_id)</param>
+      <param name="operating_mode">${base_operating_mode}</param>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+      <state_interface name="voltage"/>
+      <state_interface name="temperature"/>
+      <state_interface name="current"/>
+      <state_interface name="is_moving"/>
+    </joint>
+  </ros2_control>
+
 </robot>

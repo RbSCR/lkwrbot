@@ -2,23 +2,13 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:include filename="$(find lkwrbot_description)/urdf/inertia_tensors.urdf.xacro"/>
-  <xacro:include filename="$(find lkwrbot_description)/urdf/base.common.xacro"/>
-  <xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro"/>
+
+  <!-- xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro"  TODO remove, now in base.urdf.xacro -->
 
   <xacro:macro name="lkwrbot_base_module" params="parent *origin">
 
-    <!-- === Material definitions === -->
-    <material name="base_material">
-      <color rgba="${white_smoke_rgba}"/>
-    </material>
+    <xacro:include filename="$(find lkwrbot_description)/urdf/base.materials.xacro"/>
 
-    <material name="omniwheel_material">
-      <color rgba="${dim_grey_rgba}"/>
-    </material>
-
-    <material name="servo_material">
-      <color rgba="${greyish_black_rgba}"/>
-    </material>
 
     <!-- Mount base_link to parent platform at specified origin -->
     <joint name="lkwrbot_mount_joint" type="fixed">
@@ -258,7 +248,6 @@
       <origin xyz="${wheel_base_radius * cos(radial_offset)} ${wheel_base_radius * sin(radial_offset)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${radial_offset}"/>
       <axis xyz="0 0 1"/>
       <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
-
     </joint>
 
     <!-- back wheel joint: 180 degrees anti-clockwise from +X at radius base_radius -->
@@ -267,7 +256,7 @@
       <child link="back_wheel_link"/>
       <origin xyz="${wheel_base_radius * cos(radial_offset + radial_theta)} ${wheel_base_radius * sin(radial_offset + radial_theta)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${radial_offset + radial_theta}"/>
       <axis xyz="0 0 1"/>
-      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}" />
+      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
     </joint>
 
     <!-- right wheel joint: 300 degrees (or -60 degrees) anti-clockwise from +X at radius base_radius -->
@@ -276,7 +265,7 @@
       <child link="right_wheel_link"/>
       <origin xyz="${wheel_base_radius * cos(radial_offset - radial_theta)} ${wheel_base_radius * sin(radial_offset - radial_theta)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${radial_offset - radial_theta}"/>
       <axis xyz="0 0 1"/>
-      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}" />
+      <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
     </joint>
 
   </xacro:macro>
