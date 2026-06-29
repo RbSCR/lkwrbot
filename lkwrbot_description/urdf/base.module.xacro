@@ -97,7 +97,7 @@
     <!-- Left servo -->
     <link name="left_servo_link">
       <visual>
-        <origin xyz="${servo_depth/2} 0 ${servo_height/2}" rpy="0 ${pi/2} 0"/>
+        <origin xyz="0 0 ${servo_height/2}" rpy="0 ${pi/2} 0"/>
         <geometry>
           <mesh filename="package://lkwrbot_description/meshes/servomotor_STS3215.stl" scale="0.001 0.001 0.001"/>
         </geometry>
@@ -110,7 +110,7 @@
     <!-- back servo -->
     <link name="back_servo_link">
       <visual>
-        <origin xyz="${servo_depth/2} 0 ${servo_height/2}" rpy="0 ${pi/2} 0"/>
+        <origin xyz="0 0 ${servo_height/2}" rpy="0 ${pi/2} 0"/>
         <geometry>
           <mesh filename="package://lkwrbot_description/meshes/servomotor_STS3215.stl" scale="0.001 0.001 0.001"/>
         </geometry>
@@ -123,7 +123,7 @@
     <!-- Right servo -->
     <link name="right_servo_link">
       <visual>
-        <origin xyz="${servo_depth/2} 0 ${servo_height/2}" rpy="0 ${pi/2} 0"/>
+        <origin xyz="0 0 ${servo_height/2}" rpy="0 ${pi/2} 0"/>
         <geometry>
           <mesh filename="package://lkwrbot_description/meshes/servomotor_STS3215.stl" scale="0.001 0.001 0.001"/>
         </geometry>
