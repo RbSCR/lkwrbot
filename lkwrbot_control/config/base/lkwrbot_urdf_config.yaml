@@ -1,7 +1,8 @@
 serial_port: /dev/ttySERVO
 baud_rate: 1000000
 
-use_mock: false
+# HACK  set use_mock temporarely to true
+use_mock: true
 use_sync_write: true
 
 left_motor_id: 7

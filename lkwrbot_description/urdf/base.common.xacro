@@ -4,9 +4,12 @@
   <!-- Common dimensions for the base of the LKWrbot robot -->
 
   <!-- Wheel mount offsets -->
-  <xacro:property name="wheel_base_radius" value="0.132239"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="wheel_base_radius" value="0.134"/>  <!-- Calculated distance (from several measurements) -->
   <xacro:property name="wheel_base_offset_z" value="0.010"/>
 
+  <!--Measured distances -->
+  <xacro:property name="motormount_backside_radius" value="0.069"/> <!-- Distance from plate centre to back of motormount -->
+  <xacro:property name="motormount_servo_offset" value="0.004"/>  <!-- Offset distance back motormount to back of servo -->
 
   <!-- three-wheel-drive radial offsets -->
   <xacro:property name="radial_offset" value="${pi/3}"/> <!-- 60° offset from X-axis -->
@@ -28,7 +31,7 @@
 
   <xacro:property name="motormount_mass" value="0.010"/>
 
-  <xacro:property name="motormount_base_radius" value="${0.100 - motormount_depth/2}"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="motormount_base_radius" value="${motormount_backside_radius + motormount_depth/2}"/>
 
 
   <!-- Servo dimensions-->
@@ -38,7 +41,7 @@
 
   <xacro:property name="servo_mass" value="0.054"/>
 
-  <xacro:property name="servo_base_radius" value="${0.100 - motormount_depth/2 - servo_depth/2 + 0.004}"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="servo_base_radius" value="${motormount_backside_radius + motormount_servo_offset + servo_depth/2 }"/>
 
 
   <!-- Omniwheel dimensions-->

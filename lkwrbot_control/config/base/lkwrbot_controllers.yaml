@@ -33,9 +33,9 @@ base_controller:
       - right_wheel_joint  # 300° from +X (60° + 240°)
 
     # Robot dimensions
-    robot_radius: 0.132239  # meters (distance from center to wheel contact point)
+    robot_radius: 0.134  # meters (distance from center to wheel contact point)
     wheel_radius: 0.051  # meters
-    # TODO values for robot_radiaus and wheel_radius also defined in urdf.xacro
+    # Note: values for robot_radius and wheel_radius also defined in urdf.xacro description package
 
     # Frame IDs
     odom_frame_id: odom
