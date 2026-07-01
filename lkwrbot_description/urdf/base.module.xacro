@@ -133,6 +133,47 @@
       <xacro:default_inertial mass="${servo_mass}"/>
     </link>
 
+    <!-- left servowheelhub -->
+    <link name="left_servowheelhub_link">
+      <visual>
+        <origin xyz="0 0 -${omniwheel_hub_width/2}" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/servowheelhub.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <!-- No collision element: inside robot -->
+      <!-- Assuming inertia is comparable to a cylinder (flange is excluded) -->
+      <xacro:inertial_cylinder mass="${servowheelhub_mass}" radius="${servowheelhub_radius}" length="${servowheelhub_width}"/>
+    </link>
+
+    <link name="back_servowheelhub_link">
+      <visual>
+        <origin xyz="0 0 -${omniwheel_hub_width/2}" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/servowheelhub.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <!-- No collision element: inside robot -->
+      <!-- Assuming inertia is comparable to a cylinder (flange is excluded) -->
+      <xacro:inertial_cylinder mass="${servowheelhub_mass}" radius="${servowheelhub_radius}" length="${servowheelhub_width}"/>
+    </link>
+
+    <!-- right servowheelhub -->
+    <link name="right_servowheelhub_link">
+      <visual>
+        <origin xyz="0 0 -${omniwheel_hub_width/2}" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://lkwrbot_description/meshes/servowheelhub.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="base_material"/>
+      </visual>
+      <!-- No collision element: inside robot -->
+      <!-- Assuming inertia is comparable to a cylinder (flange is excluded) -->
+      <xacro:inertial_cylinder mass="${servowheelhub_mass}" radius="${servowheelhub_radius}" length="${servowheelhub_width}"/>
+    </link>
+
     <!-- Left wheel -->
     <link name="left_wheel_link">
       <visual>
@@ -250,6 +291,13 @@
       <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
     </joint>
 
+    <!-- left servowheelhub joint -->
+    <joint name="left_servowheelhub_joint" type="fixed">
+      <parent link="left_wheel_link"/>
+      <child link="left_servowheelhub_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
     <!-- back wheel joint: 180 degrees anti-clockwise from +X at radius base_radius -->
     <joint name="back_wheel_joint" type="continuous">
       <parent link="bottom_base_plate_link"/>
@@ -259,6 +307,13 @@
       <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
     </joint>
 
+    <!-- back servowheelhub joint -->
+    <joint name="back_servowheelhub_joint" type="fixed">
+      <parent link="back_wheel_link"/>
+      <child link="back_servowheelhub_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
     <!-- right wheel joint: 300 degrees (or -60 degrees) anti-clockwise from +X at radius base_radius -->
     <joint name="right_wheel_joint" type="continuous">
       <parent link="bottom_base_plate_link"/>
@@ -266,6 +321,13 @@
       <origin xyz="${wheel_base_radius * cos(radial_offset - radial_theta)} ${wheel_base_radius * sin(radial_offset - radial_theta)} ${wheel_base_offset_z}" rpy="0 ${pi/2} ${radial_offset - radial_theta}"/>
       <axis xyz="0 0 1"/>
       <limit effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
+    </joint>
+
+    <!-- right servowheelhub joint -->
+    <joint name="right_servowheelhub_joint" type="fixed">
+      <parent link="right_wheel_link"/>
+      <child link="right_servowheelhub_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
   </xacro:macro>

@@ -43,10 +43,18 @@
 
   <xacro:property name="servo_base_radius" value="${motormount_backside_radius + motormount_servo_offset + servo_depth/2 }"/>
 
+  <!-- Servowheel hub dimensions-->
+  <xacro:property name="servowheelhub_diameter" value="0.030"/>
+  <xacro:property name="servowheelhub_width" value="0.014"/>
+  <xacro:property name="servowheelhub_mass" value="0.009"/>
+
+  <xacro:property name="servowheelhub_radius" value="${servowheelhub_diameter/2}"/>
 
   <!-- Omniwheel dimensions-->
   <xacro:property name="omniwheel_diameter" value="0.102"/>
-  <xacro:property name="omniwheel_width" value="0.031"/>
+  <xacro:property name="omniwheel_width" value="0.037"/>  <!-- Overall width incl rollers -->
+
+  <xacro:property name="omniwheel_hub_width" value="0.034"/> <!-- Width around the hub -->
 
   <xacro:property name="omniwheel_mass" value="0.292"/>  <!--incl. hub & bolts nuts -->
 
