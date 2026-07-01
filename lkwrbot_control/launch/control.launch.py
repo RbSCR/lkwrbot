@@ -92,17 +92,6 @@ def launch_setup(context):
         parameters=[{'use_sim_time': use_sim_time}],
     )
 
-    # TODO  check twist_switch_node needed
-    #twist_switch_node = Node(
-    #    package='lkwrbot_control',
-    #    executable='twist_switch_node',
-    #    name='twist_switch',
-    #    output='log',
-    #    parameters=[
-    #        f'{pkg_ctrl}/config/base/twist_switch.yaml',
-    #        {'use_sim_time': use_sim_time},
-    #    ],
-    #)
 
     joint_state_broadcaster_spawner = TimerAction(
         period=2.0,
@@ -138,8 +127,6 @@ def launch_setup(context):
         joint_state_broadcaster_spawner,
         extra_spawners,
         teleop_node,
-        # twist_switch_node,
-        # TODO check twist_switch_node needed
     ]
 
     if launch_joy:
