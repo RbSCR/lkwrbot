@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<!-- Arguments (externally settable via command line or parent xacro) -->
+  <!-- Arguments (externally settable via command line or parent xacro) -->
   <xacro:arg name="serial_port" default="/dev/ttySERVO"/>
   <xacro:arg name="baud_rate" default="1000000"/>
   <xacro:arg name="use_mock" default="false"/>
@@ -62,6 +62,7 @@
       <!-- Proportional ACC: scale per-wheel acceleration so all wheels finish ramping in equal time -->
       <param name="proportional_acc_max">${proportional_acc_max}</param>
     </hardware>
+
     <!-- Left wheel joint (Motor ID 7) -->
     <joint name="left_wheel_joint">
       <param name="motor_id">$(arg left_motor_id)</param>
@@ -75,6 +76,7 @@
       <state_interface name="current"/>
       <state_interface name="is_moving"/>
     </joint>
+
     <!-- Back wheel joint (Motor ID 8) -->
     <joint name="back_wheel_joint">
       <param name="motor_id">$(arg back_motor_id)</param>
@@ -88,6 +90,7 @@
       <state_interface name="current"/>
       <state_interface name="is_moving"/>
     </joint>
+
     <!-- Right wheel joint (Motor ID 9) -->
     <joint name="right_wheel_joint">
       <param name="motor_id">$(arg right_motor_id)</param>

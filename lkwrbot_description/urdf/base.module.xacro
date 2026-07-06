@@ -3,12 +3,10 @@
 
   <xacro:include filename="$(find lkwrbot_description)/urdf/inertia_tensors.urdf.xacro"/>
 
-  <!-- xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro"  TODO remove, now in base.urdf.xacro -->
 
   <xacro:macro name="lkwrbot_base_module" params="parent *origin">
 
     <xacro:include filename="$(find lkwrbot_description)/urdf/base.materials.xacro"/>
-
 
     <!-- Mount base_link to parent platform at specified origin -->
     <joint name="lkwrbot_mount_joint" type="fixed">
@@ -147,6 +145,7 @@
       <xacro:inertial_cylinder mass="${servowheelhub_mass}" radius="${servowheelhub_radius}" length="${servowheelhub_width}"/>
     </link>
 
+    <!-- back servowheelhub -->
     <link name="back_servowheelhub_link">
       <visual>
         <origin xyz="0 0 -${omniwheel_hub_width/2}" rpy="0 0 0"/>
@@ -280,7 +279,6 @@
       <child link="right_servo_link"/>
       <origin xyz="${servo_base_radius * cos(radial_offset - radial_theta)} ${servo_base_radius * sin(radial_offset - radial_theta)} 0" rpy="0 0 ${radial_offset - radial_theta}"/>
     </joint>
-
 
     <!-- left wheel joint: 60 degrees anti-clockwise from +X at radius wheel_base_radius -->
     <joint name="left_wheel_joint" type="continuous">
