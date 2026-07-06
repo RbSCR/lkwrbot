@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Colors (RGBA) and Materials definition -->
+
+  <xacro:property name="white_smoke_rgba" value="0.961 0.961 0.961 1.0"/>
+  <xacro:property name="dim_grey_rgba" value="0.412 0.412 0.412 1.0"/>
+  <xacro:property name="greyish_black_rgba" value="0.314 0.314 0.314 1.0"/>
+
+  <material name="base_material">
+    <color rgba="${white_smoke_rgba}"/>
+  </material>
+
+  <material name="omniwheel_material">
+    <color rgba="${dim_grey_rgba}"/>
+  </material>
+
+  <material name="servo_material">
+    <color rgba="${greyish_black_rgba}"/>
+  </material>
+
+</robot>

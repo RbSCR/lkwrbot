@@ -63,7 +63,7 @@
     </inertial>
   </xacro:macro>
 
-    <xacro:macro name="inertial_hollow_sphere_with_pose" params="mass diameter *origin">
+  <xacro:macro name="inertial_hollow_sphere_with_pose" params="mass diameter *origin">
     <inertial>
       <!-- Hollow sphere with pose-->
       <xacro:insert_block name="origin"/>
@@ -126,6 +126,6 @@
                           iyy="1e-3"  iyz="0.0"
                                       izz="1e-3" />
     </inertial>
-</xacro:macro>
+  </xacro:macro>
 
 </robot>

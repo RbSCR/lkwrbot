@@ -1,22 +1,19 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- Colors (RGBA) -->
-  <xacro:property name="white_smoke_rgba" value="0.961 0.961 0.961 1.0"/>
-  <xacro:property name="dim_grey_rgba" value="0.412 0.412 0.412 1.0"/>
-  <xacro:property name="greyish_black_rgba" value="0.314 0.314 0.314 1.0"/>
-
-  <!-- Base mesh rotation about Z (rad) -->
-  <xacro:property name="base_offset_rz" value="${3*pi/2}"/> <!-- TODO check still used -->
+  <!-- Common dimensions for the base of the LKWrbot robot -->
 
   <!-- Wheel mount offsets -->
-  <xacro:property name="wheel_base_radius" value="0.132239"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="wheel_base_radius" value="0.132"/>  <!-- Measured distance -->
   <xacro:property name="wheel_base_offset_z" value="0.010"/>
 
-  <!-- 60° offset from X-axis -->
-  <xacro:property name="radial_offset" value="${pi/3}"/>
-  <!-- 120° between wheels -->
-  <xacro:property name="radial_theta" value="${2*pi/3}"/>
+  <!--Measured distances -->
+  <xacro:property name="motormount_backside_radius" value="0.069"/> <!-- Distance from plate centre to back of motormount -->
+  <xacro:property name="motormount_servo_offset" value="0.005"/>  <!-- Offset distance back motormount to back of servo -->
+
+  <!-- three-wheel-drive radial offsets -->
+  <xacro:property name="radial_offset" value="${pi/3}"/> <!-- 60° offset from X-axis -->
+  <xacro:property name="radial_theta" value="${2*pi/3}"/> <!-- 120° between wheels -->
 
 
   <!-- Plate dimensions-->
@@ -34,7 +31,7 @@
 
   <xacro:property name="motormount_mass" value="0.010"/>
 
-  <xacro:property name="motormount_base_radius" value="${0.100 - motormount_depth/2}"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="motormount_base_radius" value="${motormount_backside_radius + motormount_depth/2}"/>
 
 
   <!-- Servo dimensions-->
@@ -44,30 +41,25 @@
 
   <xacro:property name="servo_mass" value="0.054"/>
 
-  <xacro:property name="servo_base_radius" value="${0.100 - motormount_depth/2 - servo_depth/2 + 0.004}"/> <!--TODO determine/measure correct value -->
+  <xacro:property name="servo_base_radius" value="${motormount_backside_radius + motormount_servo_offset + servo_depth/2 }"/>
+
+
+  <!-- Servowheel hub dimensions-->
+  <xacro:property name="servowheelhub_diameter" value="0.030"/>
+  <xacro:property name="servowheelhub_width" value="0.014"/>
+  <xacro:property name="servowheelhub_mass" value="0.009"/>
+
+  <xacro:property name="servowheelhub_radius" value="${servowheelhub_diameter/2}"/>
 
 
   <!-- Omniwheel dimensions-->
   <xacro:property name="omniwheel_diameter" value="0.102"/>
-  <xacro:property name="omniwheel_width" value="0.031"/>
+  <xacro:property name="omniwheel_width" value="0.037"/>  <!-- Overall width incl rollers -->
+
+  <xacro:property name="omniwheel_hub_width" value="0.034"/> <!-- Width around the hub -->
+
   <xacro:property name="omniwheel_mass" value="0.292"/>  <!--incl. hub & bolts nuts -->
 
   <xacro:property name="omniwheel_radius" value="${omniwheel_diameter/2}"/>
-
-
-  <!-- Control related -->
-  <!-- TODO Determine if these should be specified here or in a separate .urdf.xacro file -->
-
-  <!-- Configurable hardware parameters (STS3215 defaults) -->
-  <!-- HACK changed from arg to property-->
-  <xacro:arg name="sts_max_velocity_steps" default="3400"/>  <!-- STS3215=3400, STS3032=2900, STS3235=3400 -->
-  <xacro:arg name="proportional_acc_max"   default="25"/>    <!-- [0-254]; 0 = disable proportional ACC -->
-
-  <!-- Maximum allowable speed/acceleration/torque for each motor -->
-  <!-- xacro:property name="max_velocity_steps" value="${int(sts_max_velocity_steps * 0.85)}" --> <!-- steps/second (85% of hardware max, 15% safety margin) -->
-  <!-- VScode extension "Robot Developer Extensions for URDF" command 'URDF preview' can't handle int(...)-->
-  <xacro:property name="max_velocity_steps" value="2890"/> <!-- steps/second (85% of hardware max, 15% safety margin) -->
-  <xacro:property name="max_velocity_rads" value="${max_velocity_steps*2*pi/4096}"/> <!-- rad/s -->
-  <xacro:property name="max_torque_nm" value="2.942"/> <!-- N⋅m (30 kgf⋅cm for STS3215) -->
 
 </robot>

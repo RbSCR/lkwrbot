@@ -3,7 +3,7 @@
 
   <xacro:include filename="$(find lkwrbot_description)/urdf/base.common.xacro"/>
   <xacro:include filename="$(find lkwrbot_description)/urdf/base.module.xacro"/>
-  <!-- xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro" -->
+  <xacro:include filename="$(find lkwrbot_description)/urdf/base.control.xacro"/>
 
 
   <!-- Standalone lkwrbot base -->
