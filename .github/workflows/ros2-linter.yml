@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -14,7 +14,7 @@ env:
 
 jobs:
   # Note that we pass each job a different name to distinguish each linter job
-  # Note 2: only xmllint, no cpplint 
+  # Note 2: only xmllint, no cpplint
   #   because there are no c/cpp files (which would result in an error)
   ament_lint_cpp:
     name: ament_${{ matrix.linter }}
