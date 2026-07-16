@@ -7,30 +7,39 @@ Launch the LKWrbot robot control stack.
 import yaml
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription, OpaqueFunction, TimerAction
+from launch.actions import DeclareLaunchArgument
+from launch.actions import GroupAction
+from launch.actions import IncludeLaunchDescription
+from launch.actions import OpaqueFunction
+from launch.actions import TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
-from launch_ros.actions import Node, SetRemap
+from launch.substitutions import Command
+from launch.substitutions import FindExecutable
+from launch.substitutions import LaunchConfiguration
+from launch.substitutions import PathJoinSubstitution
+from launch_ros.actions import Node
+from launch_ros.actions import SetRemap
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
+
 def launch_setup(context):
-    serial_port  = LaunchConfiguration('sts_serial_port').perform(context)
-    use_mock     = LaunchConfiguration('use_mock').perform(context)
-    diagnostics  = LaunchConfiguration('diagnostics').perform(context)
-    launch_joy   = LaunchConfiguration('joy').perform(context).lower() in ('true', '1')
+    serial_port = LaunchConfiguration('sts_serial_port').perform(context)
+    use_mock = LaunchConfiguration('use_mock').perform(context)
+    diagnostics = LaunchConfiguration('diagnostics').perform(context)
+    launch_joy = LaunchConfiguration('joy').perform(context).lower() in ('true', '1')
     use_sim_time = LaunchConfiguration('use_sim_time').perform(context).lower() in ('true', '1')
 
     pkg_desc = FindPackageShare('lkwrbot_description').perform(context)
     pkg_ctrl = FindPackageShare('lkwrbot_control').perform(context)
-    xacro    = FindExecutable(name='xacro').perform(context)
+    xacro = FindExecutable(name='xacro').perform(context)
 
     urdf = f'{pkg_desc}/urdf/base.urdf.xacro'
 
     _cfg = yaml.safe_load(open(f'{pkg_ctrl}/config/base/lkwrbot_urdf_config.yaml'))
 
     final_serial_port = serial_port if serial_port else _cfg['serial_port']
-    final_use_mock    = use_mock if use_mock else str(_cfg['use_mock']).lower()
+    final_use_mock = use_mock if use_mock else str(_cfg['use_mock']).lower()
 
     xacro_cmd = (
         f'{xacro} {urdf}'
@@ -92,7 +101,6 @@ def launch_setup(context):
         parameters=[{'use_sim_time': use_sim_time}],
     )
 
-
     joint_state_broadcaster_spawner = TimerAction(
         period=2.0,
         actions=[Node(
@@ -116,7 +124,8 @@ def launch_setup(context):
         SetRemap('/diagnostics', '/base/diagnostics'),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
-                PathJoinSubstitution([FindPackageShare('sts_hardware_interface'), 'launch', 'motor_diagnostics.launch.py'])
+                PathJoinSubstitution([FindPackageShare('sts_hardware_interface'),
+                                      'launch', 'motor_diagnostics.launch.py'])
             ])
         ),
     ])
@@ -157,12 +166,14 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'sts_serial_port',
             default_value='',
-            description='Serial port override; empty string means use lkwrbot_urdf_config.yaml value',
+            description='Serial port override; '
+                        'empty string means use lkwrbot_urdf_config.yaml value',
         ),
         DeclareLaunchArgument(
             'use_mock',
             default_value='',
-            description='Mock mode override (true/false); empty string means use lkwrbot_urdf_config.yaml value',
+            description='Mock mode override (true/false); '
+                        'empty string means use lkwrbot_urdf_config.yaml value',
         ),
         DeclareLaunchArgument(
             'diagnostics',
@@ -177,7 +188,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'joy',
             default_value='false',
-            description='Launch joy_node on this device. Set true when the joystick is connected locally; '
+            description='Launch joy_node on this device.'
+                        'Set true when the joystick is connected locally; '
                         'leave false when /joy is published from a remote device.',
         ),
     ]
