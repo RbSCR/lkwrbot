@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
-"""
-Launch the LKWrbot robot control stack.
+"""Launch the LKWrbot robot control stack."""
 
-"""
-
-import yaml
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -21,6 +17,8 @@ from launch_ros.actions import Node
 from launch_ros.actions import SetRemap
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
+
+import yaml
 
 
 def launch_setup(context):
