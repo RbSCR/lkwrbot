@@ -1,0 +1,54 @@
+name: ROS 2 Build
+
+on:
+  pull_request:
+    branches: [ main  ]
+  push:
+    branches: [ main ]
+
+env:
+  MY_PACKAGES: lkwrbot_description lkwrbot_description_visualization lkwrbot_control
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ros_distribution:
+          - jazzy
+        include:
+          # Jazzy Ubuntu 24.04 (Noble)
+          - ros_distribution: jazzy
+            docker_image: osrf/ros:jazzy-desktop
+            use_ros2_testing: false
+
+    container:
+      image: ${{ matrix.docker_image }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup ROS environment
+        uses: ros-tooling/setup-ros@0.7.19
+        with:
+          required-ros-distributions: ${{ matrix.ros_distribution }}
+          use-ros2-testing: ${{ matrix.use_ros2_testing }}
+
+      - name: Build and Test
+        uses: ros-tooling/action-ros-ci@0.4.8
+        id: action_ros_ci_step
+        with:
+          target-ros2-distro: ${{ matrix.ros_distribution }}
+          package-name: ${{ env.MY_PACKAGES }}
+          vcs-repo-file-url: ""
+          colcon-defaults: ""     # no mixin like "coverage-gcc"
+          coverage-result: false  #
+
+      - name: Upload colcon logs
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: colcon-logs-${{ github.event.repository.name }}-${{ matrix.ros_distribution }}
+          path: ${{ steps.action_ros_ci_step.outputs.ros-workspace-directory-name }}/log
+        if: always() # upload the logs even when the build fails
